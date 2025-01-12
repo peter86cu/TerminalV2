@@ -10,7 +10,8 @@
     <version>0.0.1-SNAPSHOT</version> 
  	 <artifactId>terminal-web</artifactId>
   	<packaging>war</packaging>
-  
+    <name>terminal-web</name>
+
   <description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -57,7 +58,7 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 			<version>3.0.6</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
