@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-     steps:
+    steps:
       # Clonar el repositorio y los submódulos
       - name: Checkout code
         uses: actions/checkout@v4
