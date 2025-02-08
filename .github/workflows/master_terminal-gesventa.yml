@@ -26,9 +26,16 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
-      # Construcción de los dos submódulos
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
+      # Construcción de los dos submódulos con logs detallados
+      - name: Build envios-web
+        run: mvn clean package -DskipTests -pl envios-web -am
+
+      - name: Build terminal-web
+        run: mvn clean package -DskipTests -pl terminal-web -am
+
+      # Mostrar archivos generados
+      - name: Show generated WAR files
+        run: ls -R ${{ github.workspace }}/envios-web/target && ls -R ${{ github.workspace }}/terminal-web/target
 
       # Subir ambos WARs generados
       - name: Upload artifacts for deployment job
@@ -65,15 +72,17 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7D9AD2096432483EAD29211EB1006222 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4D2DA2C7AE1440558B45858E5060D1F8 }}
 
-      - name: Deploy WAR files to Azure Web App
-        id: deploy-to-webapp
+      # Desplegar `envios-web.war`
+      - name: Deploy envios-web to Azure Web App
+        id: deploy-envios-web
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'terminal-gesventa'
           slot-name: 'Production'
           package: 'deployment/envios-web.war'
 
-      - name: Deploy WAR files to Azure Web App (terminal-web)
+      # Desplegar `terminal-web.war`
+      - name: Deploy terminal-web to Azure Web App
         id: deploy-terminal-web
         uses: azure/webapps-deploy@v3
         with:
