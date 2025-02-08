@@ -61,9 +61,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_68CFE2E4A973455F9AD36F2A37FDE9BE }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7D9AD2096432483EAD29211EB1006222 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4D2DA2C7AE1440558B45858E5060D1F8 }}
 
       - name: Deploy WAR files to Azure Web App
         id: deploy-to-webapp
@@ -71,4 +71,12 @@ jobs:
         with:
           app-name: 'terminal-gesventa'
           slot-name: 'Production'
-          package: 'deployment/*.war'
+          package: 'deployment/envios-web.war'
+
+      - name: Deploy WAR files to Azure Web App (terminal-web)
+        id: deploy-terminal-web
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'terminal-gesventa'
+          slot-name: 'Production'
+          package: 'deployment/terminal-web.war'
