@@ -20,6 +20,7 @@ public class Ventas implements Serializable {
 	private static final long serialVersionUID = 1L;
 
      @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_venta; 
 	private int estado; 
 	private String id_usuario;
@@ -30,11 +31,12 @@ public class Ventas implements Serializable {
 	private String fecha_baja; 
 	private int movimiento; 
 	private double monto_total; 
-	private int id_cliente; 
+	private String id_cliente; 
 	private int id_apertura_cajero;
 	private int nro_consecutivo; 
 	private double iva5; 
 	private double iva10; 
+	private double iva22;
 	private int condicion; 
 	private double monto_credito; 
 	private double redondeo;
@@ -101,10 +103,10 @@ public class Ventas implements Serializable {
 	public void setMonto_total(double monto_total) {
 		this.monto_total = monto_total;
 	}
-	public int getId_cliente() {
+	public String getId_cliente() {
 		return id_cliente;
 	}
-	public void setId_cliente(int id_cliente) {
+	public void setId_cliente(String id_cliente) {
 		this.id_cliente = id_cliente;
 	}
 	public int getId_apertura_cajero() {
@@ -154,6 +156,12 @@ public class Ventas implements Serializable {
 	}
 	public void setId_transaccion(String id_transaccion) {
 		this.id_transaccion = id_transaccion;
+	}
+	public double getIva22() {
+		return iva22;
+	}
+	public void setIva22(double iva22) {
+		this.iva22 = iva22;
 	}
 	 
 	

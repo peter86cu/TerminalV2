@@ -18,4 +18,7 @@ public interface AperturaTerminalJpaSpring extends JpaRepository<AperturasTermin
 	List<AperturasTerminal> buscasAperturasAnterior(@Param("id_usuario") String id_usuario, @Param("fecha") String fecha);
 
 
+	@Query(value = "SELECT obtener_consecutivo()", nativeQuery = true)
+    int obtenerConsecutivo();
+	
 }

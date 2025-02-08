@@ -82,6 +82,14 @@ public class ParamtrosController {
 		return service.obtenerEstadoVentas();
 
 	}
+	
+	@GetMapping(value = "parametros/estado-ventas/id", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<String> obtenerEstadoVentas(@RequestParam("id") int id) throws Exception {
+
+		return service.obtenerEstadoVentasByID(id);
+
+	}
 
 	@GetMapping(value = "parametros/estado-ventas-devueltos", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)

@@ -6,6 +6,8 @@
   <packaging>pom</packaging>
   <modules>
         <module>common-terminal</module>
-        <module>terminal-web</module>       
+        <module>terminal-web</module>
+        <module>envios-web</module>
+        <module>common-online</module>
   </modules>
 </project>

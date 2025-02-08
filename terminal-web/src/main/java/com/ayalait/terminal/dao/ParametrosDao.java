@@ -21,6 +21,8 @@ public interface ParametrosDao {
 	List<Configuraciones> cargarConfiguraciones();
 
 	List<VentasEstados> obtenerEstadosVentas();
+	
+	VentasEstados obtenerEstadoVentaByID(int id);
 
 	List<VentasCausaDevueltos> obtenerVentasCausasDevueltos();
 	

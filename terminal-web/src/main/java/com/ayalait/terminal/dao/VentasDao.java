@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VentasDao {
 	
-	void addVentas(Ventas venta);
+	Ventas addVentas(Ventas venta);
 	void addDetalleVentas(VentasDetalle detalle);
 	void guardarVentaCobro(VentasCobro venta);
 	Ventas obtenerVentaPorId(int idVenta);

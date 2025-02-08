@@ -92,7 +92,11 @@ public class TerminalController {
 
 	}
 	
-	
+	@GetMapping(value = "terminal/consecutivo", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> obtenerConsecutivo() {
+        int consecutivo = service.obtenerConsecutivo();
+        return ResponseEntity.ok(consecutivo);
+    }
 	
 	
 

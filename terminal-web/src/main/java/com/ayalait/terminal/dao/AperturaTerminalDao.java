@@ -18,6 +18,9 @@ public interface AperturaTerminalDao {
 	AperturasTerminal obtenerAperturaTerminalPorId(int idApertura);
 	
 	void eliminarAperturaTerminal(int id);
+	
+	int obtenerConsecutivo();
+	
 
 
 }

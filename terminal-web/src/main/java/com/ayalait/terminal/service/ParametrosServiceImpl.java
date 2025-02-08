@@ -188,4 +188,18 @@ public class ParametrosServiceImpl implements ParametrosService {
 			
 	}
 
+	@Override
+	public ResponseEntity<String> obtenerEstadoVentasByID(int id) {
+		try {
+			VentasEstados lstEstadoV= service.obtenerEstadoVentaByID(id);
+			
+				return new ResponseEntity<String>(new Gson().toJson(lstEstadoV), HttpStatus.OK);
+
+			
+		}catch (Exception e){
+			return new ResponseEntity<String>(e.getCause().getCause().getMessage(), HttpStatus.NOT_ACCEPTABLE);
+
+		}
+	}
+
 }

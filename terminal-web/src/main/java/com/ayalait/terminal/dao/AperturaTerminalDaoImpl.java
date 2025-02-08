@@ -71,6 +71,11 @@ public class AperturaTerminalDaoImpl implements AperturaTerminalDao {
 		dao.deleteById(id);
 	}
 
+	@Override
+	public int obtenerConsecutivo() {
+		 return dao.obtenerConsecutivo();
+	}
+
 
 
 

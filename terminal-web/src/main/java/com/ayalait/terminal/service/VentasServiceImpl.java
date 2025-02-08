@@ -38,8 +38,8 @@ public class VentasServiceImpl implements VentasService {
 		try {
 			System.out.println(venta);
 			Ventas request = new Gson().fromJson(venta, Ventas.class);
-			service.addVentas(request);
-			return new ResponseEntity<String>("Venta guardada.",HttpStatus.OK);
+			Ventas response=service.addVentas(request);
+			return new ResponseEntity<String>(new Gson().toJson(response),HttpStatus.OK);
 
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getCause().getCause().getMessage(),HttpStatus.NOT_ACCEPTABLE);

@@ -11,7 +11,7 @@ public class Constants {
 	public static final String RESULTADO_NOK="A ocurrido un error guardando los datos. Intente de nuevo.";
 	public static final String CAJA_OK="Día abierto correctamente.";
 	public static final String CAJA_NOK="La caja ya esta abierta. Contacte a un administrador.";
-	
+	public static final String ESTADO_APERTURA_CAJA_NOK="No hay una aprtura de terminal para asignar ventas al usuario";
 	public static final String DELETE_USUARIO_OK="Usuario eliminado correctamente.";
 	
 	

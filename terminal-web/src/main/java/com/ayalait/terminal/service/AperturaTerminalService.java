@@ -22,5 +22,9 @@ public interface AperturaTerminalService {
 	ResponseEntity<String> obtenerAperturaTerminalPorId(int idApertura);
 
 	ResponseEntity<String> eliminarArqueoYDetalle(int idArqueo);
+	
+	int obtenerConsecutivo();
+	
+	
 
 }

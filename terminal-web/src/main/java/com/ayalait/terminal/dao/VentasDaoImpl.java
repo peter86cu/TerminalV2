@@ -30,8 +30,8 @@ public class VentasDaoImpl implements VentasDao {
 	
 
 	@Override
-	public void addVentas(Ventas venta) {
-		daoVentas.save(venta);
+	public Ventas addVentas(Ventas venta) {
+		return daoVentas.save(venta);
 		
 	}
 

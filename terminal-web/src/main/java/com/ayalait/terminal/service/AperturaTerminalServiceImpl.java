@@ -85,7 +85,7 @@ public class AperturaTerminalServiceImpl implements AperturaTerminalService {
 			AperturasTerminal apertura= daoTerminal.obtenerAperturaTerminalPorId(idApertura);
 			if(apertura!=null)
 				return new ResponseEntity<String>(new Gson().toJson(apertura), HttpStatus.OK);
-			return new ResponseEntity<String>(Constants.RESULTADO_NOK, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(Constants.ESTADO_APERTURA_CAJA_NOK, HttpStatus.CREATED);
 
 
 		} catch (Exception e) {
@@ -135,6 +135,15 @@ public class AperturaTerminalServiceImpl implements AperturaTerminalService {
 				return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
 			}
+		}
+
+
+		@Override
+		public int obtenerConsecutivo() {
+			
+				return daoTerminal.obtenerConsecutivo();
+
+			 
 		}
 
 

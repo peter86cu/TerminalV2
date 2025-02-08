@@ -20,6 +20,8 @@ public interface ParametrosService {
 	ResponseEntity<String> cargarConfiguraciones();
 
 	ResponseEntity<String> obtenerEstadoVentas();
+	
+	ResponseEntity<String> obtenerEstadoVentasByID(int id);
 
 	ResponseEntity<String> ventasCausasDevueltos();
 	

@@ -89,4 +89,10 @@ public class ParametrosDaoImpl implements ParametrosDao {
 		return daoFormasCobro.findAll();
 	}
 
+	@Override
+	public VentasEstados obtenerEstadoVentaByID(int id) {
+		
+		return daoEstadoVenta.findById(id).get();
+	}
+
 }
