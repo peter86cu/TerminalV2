@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - terminal-gesventa
+name: Build and deploy WAR apps to Azure Web App - terminal-gesventa
 
 on:
   push:
@@ -26,14 +26,18 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
+      # Construcción de los dos submódulos
       - name: Build with Maven
         run: mvn clean install -DskipTests
 
-      - name: Upload artifact for deployment job
+      # Subir ambos WARs generados
+      - name: Upload artifacts for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: java-app
-          path: '${{ github.workspace }}/terminal-web/target/*.war'
+          name: war-artifacts
+          path: |
+            ${{ github.workspace }}/envios-web/target/*.war
+            ${{ github.workspace }}/terminal-web/target/*.war
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,26 +46,29 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # Required for requesting the JWT
   
     steps:
-      - name: Download artifact from build job
+      - name: Download artifacts from build job
         uses: actions/download-artifact@v4
         with:
-          name: java-app
-      
+          name: war-artifacts
+          path: deployment
+
+      - name: List downloaded files
+        run: ls -R deployment
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_68CFE2E4A973455F9AD36F2A37FDE9BE }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7D9AD2096432483EAD29211EB1006222 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4D2DA2C7AE1440558B45858E5060D1F8 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy WAR files to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'terminal-gesventa'
           slot-name: 'Production'
-          package: '*.war'
-          
+          package: 'deployment/*.war'
