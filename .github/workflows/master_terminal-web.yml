@@ -72,7 +72,7 @@ jobs:
         id: deploy-envios-web
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'terminal-gesventa'
+          app-name: 'terminal-web'
           slot-name: 'Production'
           package: 'deployment/envios-web/target/configuracion-0.0.1-SNAPSHOT.war'
 
@@ -80,6 +80,6 @@ jobs:
         id: deploy-terminal-web
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'terminal-gesventa'
+          app-name: 'terminal-web'
           slot-name: 'Production'
           package: 'deployment/terminal-web/target/terminal.war'
