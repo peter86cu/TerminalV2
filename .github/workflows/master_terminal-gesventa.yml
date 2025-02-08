@@ -26,7 +26,11 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Show generated WAR files
-        run: ls -R ${{ github.workspace }}/envios-web/target && ls -R ${{ github.workspace }}/terminal-web/target
+        run: |
+          echo "Listing files in envios-web target directory:"
+          ls -lah ${{ github.workspace }}/envios-web/target/
+          echo "Listing files in terminal-web target directory:"
+          ls -lah ${{ github.workspace }}/terminal-web/target/
 
       - name: Upload artifacts for deployment job
         uses: actions/upload-artifact@v4
@@ -43,7 +47,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # Required for requesting the JWT
+      id-token: write
   
     steps:
       - name: Download artifacts from build job
@@ -52,8 +56,10 @@ jobs:
           name: war-artifacts
           path: deployment
 
-      - name: List downloaded files
-        run: ls -R deployment
+      - name: Verify downloaded artifacts
+        run: |
+          echo "Listing files in deployment directory:"
+          ls -lah deployment/
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -62,10 +68,18 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7D9AD2096432483EAD29211EB1006222 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4D2DA2C7AE1440558B45858E5060D1F8 }}
 
-      - name: Deploy WAR files to Azure Web App
-        id: deploy-to-webapp
+      - name: Deploy WAR file (envios-web)
+        id: deploy-envios-web
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'terminal-gesventa'
           slot-name: 'Production'
-          package: '*.war'
+          package: 'deployment/envios-web/target/configuracion-0.0.1-SNAPSHOT.war'
+
+      - name: Deploy WAR file (terminal-web)
+        id: deploy-terminal-web
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'terminal-gesventa'
+          slot-name: 'Production'
+          package: 'deployment/terminal-web/target/terminal.war'
