@@ -72,7 +72,7 @@ jobs:
         id: deploy-envios-web
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'terminal-web'
+          app-name: 'envios-web'
           slot-name: 'Production'
           package: 'deployment/envios-web/target/configuracion-0.0.1-SNAPSHOT.war'
 
